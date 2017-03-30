@@ -77,26 +77,8 @@ export class ReactSpoon {
             router: {
                 location: getWindowHash(),
                 activeRoutes: {},
-                go: (name = '', params = {}, opts) => {
-                    const route = this.namedRoutes[name];
-                    if (route) {
-
-                        let path = route.path;
-
-                        const pattern = new UrlPattern(path);
-
-
-                        window.location.hash = '/' + pattern.stringify(params);
-
-                        this.state.router.lastParams = params;
-                    } else {
-                        throw new Error('Unknown route name: ' + name);
-                    }
-                },
-
-                getLastParams: ()=>{
-                    return this.state.router.lastParams;
-                }
+                go: this.goToName,
+                lastParams: {}
             }
         };
 
@@ -136,6 +118,23 @@ export class ReactSpoon {
 
         // Handle browser navigation events
         window.addEventListener('hashchange', this.onRouteChanged, false);
+    }
+
+    goToName = (name = '', params = {}, opts = {}) => {
+        const route = this.namedRoutes[name];
+        if (route) {
+
+            let path = route.path;
+
+            const pattern = new UrlPattern(path);
+
+
+            window.location.hash = '/' + pattern.stringify(params);
+
+            this.state.router.lastParams = params;
+        } else {
+            throw new Error('Unknown route name: ' + name);
+        }
     }
 
 
@@ -223,8 +222,8 @@ export class ReactSpoon {
                  */
                 if (i === rhLength - 1 && route.children) {
                     component = React.createElement(handler, { ...props, key: 'route' + i }, [<h1 key="page404">404
-                    Nothing
-                    Here</h1>]);
+                        Nothing
+                        Here</h1>]);
                 } else {
                     //component = <handler {...props}></handler>;
                     component = React.createElement(handler, { ...props, key: 'route' + i });
@@ -334,17 +333,17 @@ export class Link extends Component {
 
         let isActive = false;
 
-        console.log('this params',this.props.params, ' last params', this.context.router.getLastParams());
+        console.log('this params', this.props.params, ' last params', this.context.router.lastParams);
 
-        if (this.props.toName && this.context.router.activeRoutes[this.props.toName] && Object.is(this.props.params , this.context.router.getLastParams()) ) {
+        if (this.props.toName && this.context.router.activeRoutes[this.props.toName] && Object.is(this.props.params, this.context.router.lastParams)) {
             isActive = true;
         }
 
         return (
             <a href={this.props.to || this.props.toName || '#'} onClick={this.onClick}
-        className={isActive ? 'active' : ''}>
-            {this.props.children}
-    </a>
-    );
+               className={isActive ? 'active' : ''}>
+                {this.props.children}
+            </a>
+        );
     }
 }

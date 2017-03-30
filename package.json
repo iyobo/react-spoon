@@ -2,7 +2,7 @@
   "name": "react-spoon",
   "version": "1.0.0",
   "description": "A sane routing library for react",
-  "main": "index.jsx",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +24,16 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "url-pattern": "^1.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^2.3.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.22.0"
   }
 }
