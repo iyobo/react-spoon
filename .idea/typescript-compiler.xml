@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TypeScriptCompiler">
+    <option name="nodeInterpreterTextField" value="$USER_HOME$/.nvm/versions/node/v6.5.0/lib/node_modules/ava/cli.js" />
+    <option name="useConfig" value="true" />
+  </component>
+</project>
