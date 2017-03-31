@@ -1,9 +1,11 @@
 /**
  * Created by iyobo on 2017-03-21.
  */
-import * as ReactDom from 'react-dom';
-import React, {Component} from 'react';
-import UrlPattern from 'url-pattern';
+import {Component} from 'react';
+
+var React = require('react');
+var ReactDom = require('react-dom');
+var UrlPattern = require('url-pattern');
 
 function getWindowHash() {
     const hash = window.location.hash.replace(/^#\/?|\/$/g, '');
@@ -33,10 +35,27 @@ function matchRoute(routePath, location) {
     }
 }
 
+function objectsAreEqual(a, b) {
+    for (var prop in a) {
+        if (a.hasOwnProperty(prop)) {
+            if (b.hasOwnProperty(prop)) {
+                if (typeof a[prop] === 'object') {
+                    if (!objectsAreEqual(a[prop], b[prop])) return false;
+                } else {
+                    if (a[prop] !== b[prop]) return false;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 /**
  * Routing context
  */
-class SpoonContextProvider extends React.Component {
+class SpoonContextProvider extends Component {
     static childContextTypes = {
         router: React.PropTypes.object
     };
@@ -46,7 +65,7 @@ class SpoonContextProvider extends React.Component {
     }
 
     render() {
-        return <div id="laddleContextProvider"> {this.props.children}</div>;
+        return <div id="spoonContextProvider"> {this.props.children}</div>;
     }
 }
 
@@ -77,8 +96,23 @@ export class ReactSpoon {
             router: {
                 location: getWindowHash(),
                 activeRoutes: {},
-                go: this.goToName,
-                lastParams: {}
+                go: (name = '', params = {}, opts = {}) => {
+                    const route = this.namedRoutes[name];
+                    if (route) {
+
+                        let path = route.path;
+
+                        const pattern = new UrlPattern(path);
+
+
+                        window.location.hash = '/' + pattern.stringify(params);
+
+                        this.state.router.currentParams = params;
+                    } else {
+                        throw new Error('Unknown route name: ' + name);
+                    }
+                },
+                currentParams: {}
             }
         };
 
@@ -131,7 +165,7 @@ export class ReactSpoon {
 
             window.location.hash = '/' + pattern.stringify(params);
 
-            this.state.router.lastParams = params;
+            this.state.router.currentParams = params;
         } else {
             throw new Error('Unknown route name: ' + name);
         }
@@ -140,10 +174,10 @@ export class ReactSpoon {
 
     changeRoute(changes) {
 
-        this.state = { router: { ...this.state.router, ...changes } };
+        this.state = { router: { ...this.state.router, ...changes, activeRoutes: {} } };
 
         var routeHierarchy = [];
-        this.state.router.activeRoutes = {};
+        //this.state.router.activeRoutes = {};
 
         var routeParams = null;
         var activeRoute = null;
@@ -157,7 +191,7 @@ export class ReactSpoon {
                 //console.log(route.name, '(', route.path, ')', ' --> ', routeParams);
                 if (routeParams) {
                     //The route is a match
-                    this.state.router.lastParams = routeParams;
+                    this.state.router.currentParams = routeParams;
 
                     //are we supposed to redirect?
                     if (route.redirectTo) {
@@ -295,7 +329,7 @@ export class Link extends Component {
             throw new Error('You are trying to defne a <Link> outside of a Laddle Router context. link: ' + this.props.to || this.props.toName)
         }
 
-
+        //this.checkIfActive();
     }
 
     onClick = (event) => {
@@ -329,19 +363,33 @@ export class Link extends Component {
 
     }
 
-    render() {
+    checkIfActive() {
+        this.isActive = false;
 
-        let isActive = false;
+        console.log(this.props.to || this.props.toName, 'this params', this.props.params, ' current route params', this.context.router.currentParams, this.context.router.activeRoutes);
 
-        console.log('this params', this.props.params, ' last params', this.context.router.lastParams);
+        ////The basic requirement for being active is that a toName prop exists
+        //const basicRequirement = !!this.props.activeClassName;
+        //
+        ////Next, t
 
-        if (this.props.toName && this.context.router.activeRoutes[this.props.toName] && Object.is(this.props.params, this.context.router.lastParams)) {
-            isActive = true;
+        if (this.props.toName && this.context.router.activeRoutes[this.props.toName] && objectsAreEqual(this.props.params, this.context.router.currentParams)) {
+            console.log(this.props.to || this.props.toName, 'is active')
+            //console.log(this.props.to || this.props.toName,'this params', this.props.params, ' last params', this.context.router.currentParams)
+            this.isActive = true;
         }
+    }
+
+    //componentWillUpdate() {
+    //    this.checkIfActive();
+    //}
+
+    render() {
+        this.checkIfActive();
 
         return (
             <a href={this.props.to || this.props.toName || '#'} onClick={this.onClick}
-               className={isActive ? 'active' : ''}>
+               className={this.isActive ? 'active' : ''}>
                 {this.props.children}
             </a>
         );
