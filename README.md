@@ -6,10 +6,20 @@ Github: https://github.com/iyobo/react-spoon
 
 ## How to use
 
+in html
+```
+<div id='app'></div>
+```
+
 In main file:
 ```
 
+import React from 'react';
 import {ReactSpoon} from './util/react-spoon';
+
+const someProvider = {...} //Redux, MobX or any provider
+const store = {...} //any props the provider needs
+
 new ReactSpoon([
     {
         name: '',
@@ -29,7 +39,7 @@ new ReactSpoon([
         ]
     }
 
-], { domId: 'app', provider: Provider, providerProps: { store } });
+], { domId: 'app', provider: someProvider, providerProps: { store } });
 ```
 
 ## Nav Links (Named Routes)
