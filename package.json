@@ -1,6 +1,6 @@
 {
   "name": "react-spoon",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple and sane router for React",
   "main": "lib/react-spoon.js",
   "scripts": {
