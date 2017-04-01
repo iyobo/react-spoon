@@ -366,7 +366,7 @@ export class Link extends Component {
     checkIfActive() {
         this.isActive = false;
 
-        console.log(this.props.to || this.props.toName, 'this params', this.props.params, ' current route params', this.context.router.currentParams, this.context.router.activeRoutes);
+        //console.log(this.props.to || this.props.toName, 'this params', this.props.params, ' current route params', this.context.router.currentParams, this.context.router.activeRoutes);
 
         ////The basic requirement for being active is that a toName prop exists
         //const basicRequirement = !!this.props.activeClassName;
@@ -374,7 +374,7 @@ export class Link extends Component {
         ////Next, t
 
         if (this.props.toName && this.context.router.activeRoutes[this.props.toName] && objectsAreEqual(this.props.params, this.context.router.currentParams)) {
-            console.log(this.props.to || this.props.toName, 'is active')
+            //console.log(this.props.to || this.props.toName, 'is active')
             //console.log(this.props.to || this.props.toName,'this params', this.props.params, ' last params', this.context.router.currentParams)
             this.isActive = true;
         }
