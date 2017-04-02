@@ -96,7 +96,7 @@ Besides wanting an elegant, full-featured **frontend** routing library...needing
 
 ## Why 'Spoon'?
 
-I created React-Spoon while creating [JollofJS](http://github.coom/iyobo/jollofjs) (Think Django for NodeJS). I created its built-in admin tool with React.
+I created React-Spoon while creating [JollofJS](http://github.com/iyobo/jollofjs) (Think Django for NodeJS). I created its built-in admin tool with React.
 JollofJS is named after Jollof Rice, a delicious Nigerian rice dish.
 You'd usually use a spoon when serving anything rice... which made React-Spoon an appropriate router name.
 
