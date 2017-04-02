@@ -6,6 +6,11 @@ Github: https://github.com/iyobo/react-spoon
 
 ## How to use
 
+```
+npm install --save react-spoon
+```
+
+
 in html
 ```
 <div id='app'></div>
