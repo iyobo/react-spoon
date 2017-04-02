@@ -94,11 +94,15 @@ And it is WAY more cleaner and elegant to define this static hook at the class/c
 Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Component-oriented route-event handling was one of the key reasons why I created React-Spoon
 
 
-## Why the name?
+## Why 'Spoon'?
 
-I created React-Spoon while creating JollofJS, a NodeJS framework with a built-in Model admin tool (Think Django for NodeJS).
+I created React-Spoon while creating [JollofJS](http://github.coom/iyobo/jollofjs) (Think Django for NodeJS). I created its built-in admin tool with React.
 JollofJS is named after Jollof Rice, a delicious Nigerian rice dish.
-You'd usually use a spoon to sere or eat this dish... hence React-Spoon was an appropriate router name. :P
+You'd usually use a spoon when serving anything rice... which made React-Spoon an appropriate router name.
+
+
+Yes, I'm a Foodie :P
+
 
 ## Development
 
