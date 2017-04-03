@@ -3,6 +3,9 @@
 A sane front-end Routing library for React
 Github: https://github.com/iyobo/react-spoon
 
+## Caveat Emptor
+* Only hash-based routing is supported at this time.
+
 
 ## How to use
 
