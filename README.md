@@ -20,7 +20,7 @@ In main file:
 ```
 
 import React from 'react';
-import {ReactSpoon} from './util/react-spoon';
+import {ReactSpoon} from 'react-spoon';
 
 const someProvider = {...} //Redux, MobX or any provider
 const store = {...} //any props the provider needs
