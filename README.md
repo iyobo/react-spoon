@@ -86,7 +86,7 @@ class DashboardPage extends React.Component{
 }
 ```
 
-### Why use a hook? React has life-cycle components
+### Why use a hook? React has life-cycle functions!
 
 Because React's life-cycle functions can be unpredictable, especially when doing nested routing.
 Say you wanted to print the name of each page the router was rendering in the EXACT order EACH TIME you route there i.e AppLayout > ModelLayout > ModelListPage ,
