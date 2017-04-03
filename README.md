@@ -29,22 +29,37 @@ new ReactSpoon([
     {
         name: '',
         path: '*',
-        handler: function(){ return <div>App Layout</div>},
+        handler: AppLayout},
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: 'dashboard', name: 'dashboard', handler: DashboardPage },
             { path: 'about', name: 'about', handler: () => <h1>About</h1> },
             {
-                path: 'parent/:modelName*', name: 'models', handler: ModelLayout, children: [
+             path: 'models/:modelName*', name: 'models', handler: ModelLayout, children: [
                 { path: 'models/:modelName', name: 'models.list', handler: ModelListPage },
                 { path: 'models/:modelName/create', name: 'models.create', handler: ModelEditPage },
                 { path: 'models/:modelName/:id', name: 'models.edit', handler: ModelEditPage }
-            ]
+              ]
             }
         ]
     }
 
 ], { domId: 'app', provider: someProvider, providerProps: { store } });
+```
+
+## Nested page rendering
+A layout rendering nested pages is really just rendering children.
+```
+class AppLayout extends Component {
+    
+    render(){
+        ...
+        <div>
+           {this.props.children}
+        </div>
+        ...
+    }
+}
 ```
 
 ## Nav Links (Named Routes)
