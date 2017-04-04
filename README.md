@@ -53,6 +53,8 @@ new ReactSpoon([
 ## Nested page rendering
 A layout rendering nested pages is really just rendering children.
 ```
+import {Component} from 'react';
+
 class AppLayout extends Component {
     
     render(){
@@ -68,14 +70,20 @@ class AppLayout extends Component {
 ## Nav Links (Named Routes)
 
 ```
+import {ReactSpoon} from 'react-spoon';
+
+...
+
+
+
 //This will have class="active" when we are on the dashboard page
-<Link toName="dashboard">
-    <i className="pe-7s-graph"></i>
-    <p>Dashboard</p>
-</Link>
+    <Link toName="dashboard">
+        <i className="pe-7s-graph"></i>
+        <p>Dashboard</p>
+    </Link>
 
 
-//Passing params to namedRoutes
+//Passing params to named Routes
 
     <Link toName="models.list" params={{modelName: 'User'}} >
         <p>List All Users</p>
@@ -111,7 +119,7 @@ Say you wanted to print the name of each page the router was rendering in the EX
 
 You may find that they don't show up in this order or sometimes don't show up at all. Sometimes, one route will show up multiple times while others never do.
 
-Defining/using the onEnter hook just gives you one more way to control your react app's paging with improved precision. 
+Defining/using the onEnter hook just gives you one more way to control your react app's load sequencing with improved precision. 
 And it is WAY more cleaner and elegant to define this static hook at the class/component level, and not in your main file where you are defining the route tree.
 
 Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Component-oriented route-event handling was one of the key reasons why I created React-Spoon
@@ -119,12 +127,13 @@ Besides wanting an elegant, full-featured **frontend** routing library...needing
 
 ## Why 'Spoon'?
 
-I created React-Spoon while creating [JollofJS](http://github.com/iyobo/jollofjs) (Think Django for NodeJS). I created its built-in admin tool with React.
+I created React-Spoon while creating [JollofJS](http://github.com/iyobo/jollofjs) (Think Django for NodeJS). 
+I created its built-in admin tool with React.
 JollofJS is named after Jollof Rice, a delicious Nigerian rice dish.
-You'd usually use a spoon when serving anything rice... which made React-Spoon an appropriate router name.
+You'd usually use a spoon when serving rice... which made React-Spoon an appropriate router name.
 
 
-Yes, I'm a Foodie :P
+...Yes, I'm a Foodie :P
 
 
 ## Development
