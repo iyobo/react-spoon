@@ -32,7 +32,7 @@ new ReactSpoon([
     {
         name: '',
         path: '*',
-        handler: AppLayout},
+        handler: AppLayout,
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: 'dashboard', name: 'dashboard', handler: DashboardPage },
