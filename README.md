@@ -50,7 +50,7 @@ new ReactSpoon([
 ], { domId: 'app', provider: someProvider, providerProps: { store } });
 ```
 
-## Nested page rendering
+## True Nested Routing
 A layout rendering nested pages is really just rendering children.
 ```
 import {Component} from 'react';
