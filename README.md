@@ -3,6 +3,16 @@
 A sane front-end Routing library for React
 Github: https://github.com/iyobo/react-spoon
 
+
+
+## Features
+* Making the router is as easy as instantiating a class.
+* Simple JSON-based configuration.
+* Nested routing
+* Component-level Navigation Hooks (static + reliable triggering)
+* Navigation Links (w/ Hierarchial active state)
+
+
 ## Caveat Emptor
 * Only hash-based routing is supported at this time.
 
@@ -50,6 +60,8 @@ new ReactSpoon([
 ], { domId: 'app', provider: someProvider, providerProps: { store } });
 ```
 
+You are also able to have multiple ReactSpoon instances on a page with multiple anchor points/domIds.
+
 ## True Nested Routing
 A layout rendering nested pages is really just rendering children.
 ```
@@ -70,7 +82,7 @@ class AppLayout extends Component {
 ## Nav Links (Named Routes)
 
 ```
-import {ReactSpoon} from 'react-spoon';
+import {Link} from 'react-spoon';
 
 ...
 
@@ -112,6 +124,26 @@ class DashboardPage extends React.Component{
 }
 ```
 
+
+## Why another React Router
+
+Hey! So while building a project, I found that the routing libraries in the React ecosystem **just didn't seem to get** what routing libraries do.
+They either had too much ceremony around actually using them, or they kept stripping themselves of useful features with every major release (fascinating right?).
+I also remember the devs of one claiming that "Named routes are an anti-pattern". :P
+
+Anyway! It became clear that if I was ever going to continue onwards without having to keep revisiting this routing issues, I'd just have to grab the bull by the horns and create one that worked for me.
+I'm sharing it in hopes that it works for you too! :)
+
+### Okay but what's with 'Spoon'?
+
+I created React-Spoon while creating [JollofJS](http://github.com/iyobo/jollofjs) (Think Django for NodeJS - Still in Development). 
+I created its built-in admin tool with React.
+JollofJS is named after Jollof Rice, a delicious Nigerian rice dish.
+You'd usually use a spoon when serving rice... which made React-Spoon an appropriate router name.
+
+...Yes, I'm a Foodie :P
+
+
 ### Why use a hook? React has life-cycle functions!
 
 Because React's life-cycle functions can be unpredictable, especially when doing nested routing.
@@ -119,21 +151,13 @@ Say you wanted to print the name of each page the router was rendering in the EX
 
 You may find that they don't show up in this order or sometimes don't show up at all. Sometimes, one route will show up multiple times while others never do.
 
-Defining/using the onEnter hook just gives you one more way to control your react app's load sequencing with improved precision. 
-And it is WAY more cleaner and elegant to define this static hook at the class/component level, and not in your main file where you are defining the route tree.
+Defining/using the onEnter hook just gives you one solid way to reliably control your react app's page-loading sequencing with improved precision. 
+And it is WAY more cleaner and elegant to define this static hook at the class/component level, and not in your main file or wherever you are defining the route tree.
 
 Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Component-oriented route-event handling was one of the key reasons why I created React-Spoon
 
 
-## Why 'Spoon'?
 
-I created React-Spoon while creating [JollofJS](http://github.com/iyobo/jollofjs) (Think Django for NodeJS). 
-I created its built-in admin tool with React.
-JollofJS is named after Jollof Rice, a delicious Nigerian rice dish.
-You'd usually use a spoon when serving rice... which made React-Spoon an appropriate router name.
-
-
-...Yes, I'm a Foodie :P
 
 
 ## Development
