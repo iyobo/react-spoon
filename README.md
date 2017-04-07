@@ -154,7 +154,7 @@ You may find that they don't show up in this order or sometimes don't show up at
 Defining/using the onEnter hook just gives you one solid way to reliably control your react app's page-loading sequencing with improved precision. 
 And it is WAY more cleaner and elegant to define this static hook at the class/component level, and not in your main file or wherever you are defining the route tree.
 
-Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Component-oriented route-event handling was one of the key reasons why I created React-Spoon
+Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Object-Oriented route-event handling was one of the key reasons why I created React-Spoon
 
 
 
