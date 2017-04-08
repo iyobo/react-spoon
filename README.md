@@ -62,15 +62,14 @@ new ReactSpoon([
 
 You are also able to have multiple ReactSpoon instances on a page with multiple anchor points/domIds.
 
-**The ReactSpoon Class** 
+### The ReactSpoon Class
 Its signature: new ReactSpoon(routeTree, opts)
 
-routeTree: a JSON object to define hierarchial routes. See above.
-opts: a JSON object with config options
-
-opts.domId: The DOM id of the object to mount your routed app on.
-opts.provider: The component class declaration or equivalent of a provider to wrap your app with (In the future, this will alternatively be an array for nesting multiple provdiders)
-opts.providerProps: A prop map of attributes/properties to attach to the equivalent provider. (In the future, this will alternatively be an array of prop maps)
+* routeTree: a JSON object to define hierarchial routes. See above.
+* opts: a JSON object with config options
+* opts.domId: The DOM id of the object to mount your routed app on.
+* opts.provider: The component class declaration or equivalent of a provider to wrap your app with (In the future, this will alternatively be an array for nesting multiple provdiders)
+* opts.providerProps: A prop map of attributes/properties to attach to the equivalent provider. (In the future, this will alternatively be an array of prop maps)
 
 
 ## True Nested Routing
