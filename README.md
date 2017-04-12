@@ -11,7 +11,7 @@ Github: https://github.com/iyobo/react-spoon
 * Nested routing
 * Component-level Navigation Hooks (static + reliable triggering)
 * Navigation Links (w/ Hierarchial active state)
-* StateSync
+* Store and retrieve state from URL as Key:Object or key:Value pairs
 
 
 ## Caveat Emptor
@@ -90,6 +90,7 @@ class AppLayout extends Component {
 }
 ```
 
+
 ## Nav Links (Named Routes)
 
 ```
@@ -138,6 +139,60 @@ class DashboardPage extends React.Component{
 ```
 
 If you'd like an onLeave(...) hook, create an issue on github. I am actively using RSpoon for open-source dev so chances are I'll add that before you create it. Race ya :P
+
+
+
+## URL State
+
+Use these to store and retrieve values or objects from the URL.
+It should not be used for persistence, but more so as a way for your users to be able to return to a very particular/predictable state of your app by using the exact same URL.
+e.g See what Google Maps does to it's URL while you navigate. Then try copy that URL in some other tab (or send it to a friend ) and see how it takes you back to that exact map center/zoom state.
+
+### Storing State
+
+```
+import {storeState} from 'react-spoon';
+
+
+var myState = {
+  paging: {
+          page: 1,
+          limit: 10
+      },
+      sort: { dateCreated: -1 },
+      filters: []
+  }
+}
+
+storeState('modelFilter', myState);
+
+```
+
+Simple!
+You'll notice your URL changes after you call this function:
+e.g #/models/Foo**@{"modelFilter":{"paging":{"page":1,"limit":10},"sort":{"dateCreated":-1},"filters":[]}}**
+
+
+The First '@' is the delimeter that seperates your path from your data.
+The data is stored as a JSON string.
+
+You'll want to do this, for example, when the state you are trying to persist in your url changes
+
+### Retrieving State
+Retrieving state is just as easy
+```
+import {getState} from 'react-spoon';
+
+...
+
+myState = getState('modelFilter');
+
+```
+And now myState is chuck full of all that state that is currently in your URL.
+
+Clearly, You probably want to do this when loading/mounting/onEntering something that needs this state.
+
+
 
 ## Why another React Router
 
