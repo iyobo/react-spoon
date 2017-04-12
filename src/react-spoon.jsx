@@ -7,8 +7,14 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var UrlPattern = require('url-pattern');
 
+const URL_STATE_DELIM = '@';
+
 function getWindowHash() {
-    const hash = window.location.hash.replace(/^#\/?|\/$/g, '');
+    let hash = window.location.hash.replace(/^#\/?|\/$/g, '');
+
+    //Do not include state
+    hash = hash.split(URL_STATE_DELIM)[0];
+
     //console.log('hash:', hash);
     return hash;
 }
@@ -111,13 +117,13 @@ export class ReactSpoon {
                         throw new Error('Unknown route name: ' + name);
                     }
                 },
-                buildLink: (name, params)=>{
+                buildLink: (name, params) => {
 
                     const route = this.namedRoutes[name];
-                    let link='#/';
-                    if(route) {
+                    let link = '#/';
+                    if (route) {
                         const pattern = new UrlPattern(route.path);
-                        link= '#/' + pattern.stringify(params);
+                        link = '#/' + pattern.stringify(params);
                     }
 
                     //console.log('creating link', name, params, link)
@@ -303,15 +309,58 @@ export class ReactSpoon {
             }
         });
 
-
         ReactDom.render(component, document.getElementById(this.domId));
+    }
+
+    /**
+     * Extract the url state and load it.
+     * Url state is a json string of everything after the very first @ of window.location.href
+     */
+    loadStateFromUrl() {
+
+        urlState = {};
+
+        //console.log(window.location.href)
+        const stateString = stringAfter(window.location.href, URL_STATE_DELIM);
+
+        if (!stateString) {
+            //console.log('no url state to extract');
+            return;
+        }
+
+        try {
+            urlState = JSON.parse(stateString);
+            //console.log('State pulled from URL', urlState)
+        } catch (err) {
+            console.error(stateObj, err.stack)
+        }
     }
 
     onRouteChanged = () => {
         //console.log('route changing')
+
+        //First load URL state
+        this.loadStateFromUrl();
+
+        //Now navigate
         this.changeRoute({ location: getWindowHash() });
+
+
     }
 
+}
+
+function stringAfter(str, delim) {
+    if (str.indexOf(URL_STATE_DELIM) > -1) {
+        return str.substring(str.indexOf(delim) + 1);
+    }
+    else {
+        return null;
+    }
+}
+
+function stringBefore(str, delim) {
+    return str.split(delim)[0];
 }
 
 /**
@@ -344,7 +393,7 @@ export class Link extends Component {
 
         //build href for this link
 
-        this.href = this.props.toName? router.buildLink(this.props.toName, this.props.params): this.props.to || '#/';
+        this.href = this.props.toName ? router.buildLink(this.props.toName, this.props.params) : this.props.to || '#/';
 
     }
 
@@ -414,4 +463,35 @@ export class Link extends Component {
             </a>
         );
     }
+}
+
+// querySync feature
+let urlState = {};
+
+/**
+ * Only works if pushState is supported
+ */
+function replaceUrlStateInUrl() {
+
+    const realHref = stringBefore(window.location.href, URL_STATE_DELIM);
+    const stateHref = realHref + URL_STATE_DELIM + JSON.stringify(urlState);
+
+    window.history.replaceState(null, null, stateHref);
+}
+
+export const storeState = (key, value) => {
+    if (value) {
+        //console.log('storing url state', key, value);
+        urlState[key] = value;
+    }
+    else if (urlState[key]) {
+        //pass in null value to wipe key:val from urlState
+        delete urlState[key];
+    }
+
+    replaceUrlStateInUrl();
+}
+export const getState = (key) => {
+    return urlState[key]
+
 }

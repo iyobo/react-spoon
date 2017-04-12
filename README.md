@@ -11,6 +11,7 @@ Github: https://github.com/iyobo/react-spoon
 * Nested routing
 * Component-level Navigation Hooks (static + reliable triggering)
 * Navigation Links (w/ Hierarchial active state)
+* StateSync
 
 
 ## Caveat Emptor
