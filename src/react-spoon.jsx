@@ -104,13 +104,25 @@ export class ReactSpoon {
 
                         const pattern = new UrlPattern(path);
 
-
                         window.location.hash = '/' + pattern.stringify(params);
 
                         this.state.router.currentParams = params;
                     } else {
                         throw new Error('Unknown route name: ' + name);
                     }
+                },
+                buildLink: (name, params)=>{
+
+                    const route = this.namedRoutes[name];
+                    let link='#/';
+                    if(route) {
+                        const pattern = new UrlPattern(route.path);
+                        link= '#/' + pattern.stringify(params);
+                    }
+
+                    console.log('creating link', name, params, link)
+
+                    return link;
                 },
                 currentParams: {}
             }
@@ -312,6 +324,7 @@ export class Link extends Component {
         super();
         this.state = {};
 
+
     }
 
     static contextTypes = {
@@ -326,12 +339,19 @@ export class Link extends Component {
         var router = this.context.router;
 
         if (!router) {
-            throw new Error('You are trying to defne a <Link> outside of a Laddle Router context. link: ' + this.props.to || this.props.toName)
+            throw new Error('You are trying to define a <Link> outside of a Laddle Router context. link: ' + this.props.to || this.props.toName)
         }
 
-        //this.checkIfActive();
+        //build href for this link
+
+        this.href = this.props.toName? router.buildLink(this.props.toName, this.props.params): this.props.to || '#/';
+
     }
 
+    /**
+     * Not used! Links will now build hrefs on Mount insead of per-click. Performance boost.
+     * @param event
+     */
     onClick = (event) => {
         if (this.props.onClick) this.props.onClick(event);
 
@@ -388,7 +408,7 @@ export class Link extends Component {
         this.checkIfActive();
 
         return (
-            <a href={this.props.to || this.props.toName || '#'} onClick={this.onClick}
+            <a href={this.href}
                className={this.isActive ? 'active' : ''}>
                 {this.props.children}
             </a>
