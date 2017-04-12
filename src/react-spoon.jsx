@@ -120,7 +120,7 @@ export class ReactSpoon {
                         link= '#/' + pattern.stringify(params);
                     }
 
-                    console.log('creating link', name, params, link)
+                    //console.log('creating link', name, params, link)
 
                     return link;
                 },
