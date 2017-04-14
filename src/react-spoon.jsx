@@ -96,7 +96,8 @@ export class ReactSpoon {
         this.providerEl = opts.provider;
         this.providerProps = opts.providerProps;
 
-        this.activeRoute = null;
+        this.currentRouteHierarchy = null;
+        this.currentHierarchyProps = {};
 
         this.state = {
             router: {
@@ -190,7 +191,25 @@ export class ReactSpoon {
     }
 
 
+    /**
+     *
+     * @param changes
+     * @param changes.location - pure hash of current window url
+     */
     changeRoute(changes) {
+
+        /***
+         * First thing to do on route change is to call onLeave on all active routes' handler components
+         */
+        if(this.currentRouteHierarchy){
+            this.currentRouteHierarchy.forEach((it)=>{
+                if (( it.handler.wrappedComponent || it.handler).onLeave) {
+                    it.handler.wrappedComponent.onLeave(this.currentHierarchyProps);
+                }
+            })
+        }
+
+
 
         this.state = { router: { ...this.state.router, ...changes, activeRoutes: {} } };
 
@@ -308,6 +327,14 @@ export class ReactSpoon {
                 it.handler.wrappedComponent.onEnter(props);
             }
         });
+
+
+        /**
+         * At this point, this is the current route hierarchy
+         *
+         */
+        this.currentRouteHierarchy = routeHierarchy;
+        this.currentHierarchyProps = props;
 
         ReactDom.render(component, document.getElementById(this.domId));
     }
