@@ -199,16 +199,19 @@ export class ReactSpoon {
     changeRoute(changes) {
 
         /***
-         * First thing to do on route change is to call onLeave on all active routes' handler components
+         * First thing to do on route change is to call onLeave on all active routes' handler components, from last to first.
          */
         if(this.currentRouteHierarchy){
-            this.currentRouteHierarchy.forEach((it)=>{
+
+            for(let i=this.currentRouteHierarchy.length-1; i >=0; i--){
+                const it = this.currentRouteHierarchy[i];
+
                 if (( it.handler.wrappedComponent || it.handler).onLeave) {
                     it.handler.wrappedComponent.onLeave(this.currentHierarchyProps);
                 }
-            })
-        }
 
+            }
+        }
 
 
         this.state = { router: { ...this.state.router, ...changes, activeRoutes: {} } };

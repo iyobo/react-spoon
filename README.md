@@ -122,7 +122,8 @@ import {Link} from 'react-spoon';
 
 ## On-Enter Hook
 
-Spoon will look for a static OnEnter(...) function declaration in your React Component and call it whenever it is navigating to that component.
+Spoon will look for a static OnEnter(props) function declaration in your React Component and call it whenever it is navigating to that component.
+This respects nested routing too, with the topmost component's onEnter triggered first and the next in sequence. (First to Last)
 In the future, this function might be made to handle (returned) promises.
 
 ```
@@ -138,11 +139,29 @@ class DashboardPage extends React.Component{
 }
 ```
 
-If you'd like an onLeave(...) hook, create an issue on github. I am actively using RSpoon for open-source dev so chances are I'll add that before you create it. Race ya :P
+~~If you'd like an onLeave(...) hook, create an issue on github. I am actively using RSpoon for open-source dev so chances are I'll add that before you create it. Race ya :P~~
 
+## On-Leave hook (Added since v1.4)
 
+Beat you to it! :D
 
-## URL State
+You can now create a static onLeave(props) function that RSpoon will call whenever it is navigating away from a route's component.
+This, like onEnter, respects nested routing. Only difference is that it reverses the order of activation, i.e. Last to First.
+
+```
+class DashboardPage extends React.Component{
+
+...
+
+  static onLeave(props){
+    console.log('Leaving Dashboard Page');
+  }
+...
+
+}
+```
+
+## URL State (Added since v1.3)
 
 Use these to store and retrieve values or objects from the URL.
 It should not be used for persistence, but more so as a way for your users to be able to return to a very particular/predictable state of your app by using the exact same URL.
@@ -193,15 +212,23 @@ And now myState is chuck full of all that state that is currently in your URL.
 Clearly, You probably want to do this when loading/mounting/onEntering something that needs this state.
 
 
+## Q&A
 
-## Why another React Router
+### Is that JSON? Ewwww Why?
 
-So while building JollofJS, I found that the routing libraries in the React ecosystem **just didn't seem to get** what routing libraries do IMO.
+JSON is more flexible to configure than ~~XML~~ JSX :D.
+For one, It's simply the best vehicle for conditional or even distributed route configuration.
+You can have different modules/functions/whatever define what they want for a route and it can all then be converged into one JS object that RSpoon consumes.
+
+
+### Why another React Router?
+
+So while building [JollofJS](http://github.com/iyobo/jollofjs), I found that the routing libraries in the React ecosystem **just didn't seem to get** what routing libraries do IMO.
 They either had too much ceremony around actually using them, or they kept stripping themselves of useful features with every major release (fascinating right?).
 I also remember the devs of one claiming that "Named routes are an anti-pattern". :P
 
 Anyway! It became clear that if I was ever going to continue onwards without having to keep revisiting this routing issues, I'd just have to grab the bull by the horns and create one that worked "for me".
-I'm sharing it in hopes that it works for someone out there too. :)
+I'm sharing it in hopes that it works for someone out there too.
 
 ### Okay but what's with 'Spoon'?
 
@@ -223,12 +250,13 @@ You may find that they don't show up in this order or sometimes don't show up at
 Defining/using the onEnter hook just gives you one solid way to reliably control your react app's page-nesting sequencing with improved precision.
 And it is WAY more cleaner and elegant to define this static hook at the class/component level, and not in your main file or wherever you are defining the route tree.
 
-Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Object-Oriented route-event handling was one of the key reasons why I created React-Spoon
+Besides wanting an elegant, full-featured **frontend** routing library...needing one with Reliable, Object-Level route-event handling was one of the key reasons why I created React-Spoon
 
 
 
 
 ## Development
+* `npm i`
 
 * Make sure babel is installed globally
 
