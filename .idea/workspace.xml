@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="79771e83-09ed-4c1e-a83e-832cdb11b7e8" name="Default" comment="">
+    <list default="true" id="79771e83-09ed-4c1e-a83e-832cdb11b7e8" name="Default" comment="- Added onLeave Hook&#10;- More docs">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/react-spoon.jsx" afterPath="$PROJECT_DIR$/src/react-spoon.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,12 +21,12 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="465">
-                <caret line="148" column="125" lean-forward="false" selection-start-line="148" selection-start-column="125" selection-end-line="148" selection-end-column="125" />
+              <first_editor relative-caret-position="257">
+                <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -38,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="react-spoon.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="react-spoon.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/react-spoon.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="201" column="125" lean-forward="false" selection-start-line="201" selection-start-column="125" selection-end-line="201" selection-end-column="125" />
+            <state relative-caret-position="360">
+              <caret line="362" column="9" lean-forward="true" selection-start-line="362" selection-start-column="9" selection-end-line="362" selection-end-column="9" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -82,6 +81,8 @@
       <find>console.log</find>
       <find>onLeave</find>
       <find>onEnter</find>
+      <find>go</find>
+      <find>= {}</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,8 +107,8 @@
         <option value="$PROJECT_DIR$/react-spoon.jsx" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/react-spoon.jsx" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/react-spoon.jsx" />
       </list>
     </option>
   </component>
@@ -497,7 +498,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66581000" />
+    <option name="totallyTimeSpent" value="68772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="566" y="36" width="1456" height="1103" extended-state="0" />
@@ -835,21 +836,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/react-spoon.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="201" column="125" lean-forward="false" selection-start-line="201" selection-start-column="125" selection-end-line="201" selection-end-column="125" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="465">
-            <caret line="148" column="125" lean-forward="false" selection-start-line="148" selection-start-column="125" selection-end-line="148" selection-end-column="125" />
+          <first_editor relative-caret-position="257">
+            <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
@@ -857,6 +848,16 @@
       </provider>
       <provider editor-type-id="MarkdownFxPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/react-spoon.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="362" column="9" lean-forward="true" selection-start-line="362" selection-start-column="9" selection-end-line="362" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

@@ -348,6 +348,10 @@ export class ReactSpoon {
      */
     loadStateFromUrl() {
 
+        /**
+         * AGAIN, the purpose of URLState is not to store persistent state, but rather to DISPLAY a URL that better matches your page's current/reproducable state...reproducability that you define.
+         * @type {{}}
+         */
         urlState = {};
 
         //console.log(window.location.href)
