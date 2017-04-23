@@ -83,8 +83,7 @@ export class ReactSpoon {
      * @param routes
      * @param opts
      * @param opts.domId
-     * @param opts.provider
-     * @param opts.providerProps
+     * @param opts.providers
      */
     constructor(routes, opts = {}) {
 
@@ -93,8 +92,11 @@ export class ReactSpoon {
         this.namedRoutes = {};
 
         //Providers
-        this.providerEl = opts.provider;
-        this.providerProps = opts.providerProps;
+        //this.providerEl = opts.provider;
+        //this.providerProps = opts.providerProps;
+
+        this.providers = opts.providers || [];
+
 
         this.currentRouteHierarchy = null;
         this.currentHierarchyProps = {};
@@ -201,9 +203,9 @@ export class ReactSpoon {
         /***
          * First thing to do on route change is to call onLeave on all active routes' handler components, from last to first.
          */
-        if(this.currentRouteHierarchy){
+        if (this.currentRouteHierarchy) {
 
-            for(let i=this.currentRouteHierarchy.length-1; i >=0; i--){
+            for (let i = this.currentRouteHierarchy.length - 1; i >= 0; i--) {
                 const it = this.currentRouteHierarchy[i];
 
                 if (( it.handler.wrappedComponent || it.handler).onLeave) {
@@ -278,7 +280,13 @@ export class ReactSpoon {
          * Build component hierarchy from route hierarchy.
          */
         const rhLength = routeHierarchy.length;
-        const props = { ...this.state, ...routeParams, ...this.providerProps };
+
+        //Determine the combined props, which is a merger of all the props in this router instance
+        const providerProps = this.providers.reduce((result, next)=>{
+            return {...result, ...next.props}
+        },{});
+
+        const combinedProps = { ...this.state, ...routeParams, ...providerProps };
 
 
         for (let i = rhLength - 1; i >= 0; i--) {
@@ -287,7 +295,7 @@ export class ReactSpoon {
             const handler = route.handler;
 
             if (component) {
-                component = React.createElement(handler, { ...props, key: 'route' + i }, [component]);
+                component = React.createElement(handler, { ...combinedProps, key: 'route' + i }, [component]);
                 //React.createElement(route.handler, props, [component]);
             } else {
                 /**
@@ -295,20 +303,23 @@ export class ReactSpoon {
                  * If the last item in the route hierarchy has a children field, then this is obviously a nested 404
                  */
                 if (i === rhLength - 1 && route.children) {
-                    component = React.createElement(handler, { ...props, key: 'route' + i }, [<h1 key="page404">404
+                    component = React.createElement(handler, { ...combinedProps, key: 'route' + i }, [<h1 key="page404">404
                         Nothing
                         Here</h1>]);
                 } else {
                     //component = <handler {...props}></handler>;
-                    component = React.createElement(handler, { ...props, key: 'route' + i });
+                    component = React.createElement(handler, { ...combinedProps, key: 'route' + i });
                 }
             }
 
         }
 
-        //Wrap with Given provider element e.g. Mobx
-        component = React.createElement(this.providerEl, this.providerProps, component);
-
+        //Wrap with Given provider elements e.g. Mobx, muitheme etc
+        for (let i = this.providers.length - 1; i >= 0; i--) {
+            const provider = this.providers[i];
+            console.log(provider)
+            component = React.createElement(provider.component, provider.props || {}, component);
+        }
 
         //Wrap with Routing context
         component = React.createElement(SpoonContextProvider, this.state, component);
@@ -327,7 +338,7 @@ export class ReactSpoon {
         routeHierarchy.forEach((it) => {
 
             if (( it.handler.wrappedComponent || it.handler).onEnter) {
-                it.handler.wrappedComponent.onEnter(props);
+                it.handler.wrappedComponent.onEnter(combinedProps);
             }
         });
 
@@ -337,7 +348,7 @@ export class ReactSpoon {
          *
          */
         this.currentRouteHierarchy = routeHierarchy;
-        this.currentHierarchyProps = props;
+        this.currentHierarchyProps = combinedProps;
 
         ReactDom.render(component, document.getElementById(this.domId));
     }

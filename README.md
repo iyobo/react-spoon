@@ -36,7 +36,7 @@ In main file:
 import React from 'react';
 import {ReactSpoon} from 'react-spoon';
 
-const someProvider = {...} //Redux, MobX or any provider
+const SomeProvider = {...} //Redux, MobX or any provider
 const store = {...} //any props the provider needs
 
 new ReactSpoon([
@@ -58,7 +58,7 @@ new ReactSpoon([
         ]
     }
 
-], { domId: 'app', provider: someProvider, providerProps: { store } });
+], { domId: 'app', providers: [ {component: SomeProvider, props: { store }}, {component: AnotherProvider} ] );
 ```
 
 You are also able to have multiple ReactSpoon instances on a page with multiple anchor points/domIds.
@@ -69,8 +69,20 @@ Its signature: new ReactSpoon(routeTree, opts)
 * routeTree: a JSON object to define hierarchial routes. See above.
 * opts: a JSON object with config options
 * opts.domId: The DOM id of the object to mount your routed app on.
-* opts.provider: The component class declaration or equivalent of a provider to wrap your app with (In the future, this will alternatively be an array for nesting multiple provdiders)
-* opts.providerProps: A prop map of attributes/properties to attach to the equivalent provider. (In the future, this will alternatively be an array of prop maps)
+* opts.providers: An array of components and their props which you intend to wrap around your routed components.
+* opts.providers.*.component: The provider component to instantiate
+* opts.providers.*.props: The props to attach to this provider component when instantiating it.
+The order of defining providers is important. In the above example, this is the JSX equivalent
+
+<SomeProvider {...store}>
+    <AnotherProvider>
+        // ... your routed components
+    </AnotherProvider>
+</SomeProvider>
+
+These have been replaced by opts.providers and are now **decommisioned**. Please upgrade by using the new opts.providers syntax:
+~~* opts.provider: The component class declaration or equivalent of a provider to wrap your app with (In the future, this will alternatively be an array for nesting multiple provdiders)~~
+~~* opts.providerProps: A prop map of attributes/properties to attach to the equivalent provider. (In the future, this will alternatively be an array of prop maps)~~
 
 
 ## True Nested Routing
