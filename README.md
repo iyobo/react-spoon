@@ -120,6 +120,40 @@ import {Link} from 'react-spoon';
 
 ```
 
+## Programmatic navigation
+
+Every instance of React-Spoon makes use of the react context API for making itself visible in any component. 
+You grab a reference to this instance by statically defining contextTypes in your component:
+
+```
+class MyComponent extends React.Component{
+
+    ... 
+    
+    static contextTypes = {
+        router: PropTypes.any
+    }
+    
+    ...
+    
+    someFunction = () => {
+    
+        //navigates to destination
+        this.context.router.go('app.myRouteName', {routeParams} )
+        
+        //or if you just want the url without actually navigating to it
+        const path = this.context.router.buildLink('app.myRouteName', {routeParams} )
+    }
+
+```
+
+
+
+It is highly recommended to navigate this way as opposed to just trying to change window.location.href... (even though that should still work).
+
+Also, only **named routes** can be programmatically navigated to at this time. (It's a better pattern/structure to navigate with named routes anyway!)
+
+
 ## On-Enter Hook
 
 Spoon will look for a static OnEnter(props) function declaration in your React Component and call it whenever it is navigating to that component.
