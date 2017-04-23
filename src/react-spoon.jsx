@@ -317,7 +317,7 @@ export class ReactSpoon {
         //Wrap with Given provider elements e.g. Mobx, muitheme etc
         for (let i = this.providers.length - 1; i >= 0; i--) {
             const provider = this.providers[i];
-            console.log(provider)
+            //console.log(provider)
             component = React.createElement(provider.component, provider.props || {}, component);
         }
 
