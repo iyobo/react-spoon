@@ -153,7 +153,7 @@ export class ReactSpoon {
                  * Create context
                  */
                 if (it.handler) {
-                    (it.handler.wrappedComponent || it.handler ).contextTypes = {
+                    (it.handler.wrappedComponent || it.handler).contextTypes = {
                         router: React.PropTypes.any
                     };
                 }
@@ -208,7 +208,7 @@ export class ReactSpoon {
             for (let i = this.currentRouteHierarchy.length - 1; i >= 0; i--) {
                 const it = this.currentRouteHierarchy[i];
 
-                if (( it.handler.wrappedComponent || it.handler).onLeave) {
+                if ((it.handler.wrappedComponent || it.handler).onLeave) {
                     it.handler.wrappedComponent.onLeave(this.currentHierarchyProps);
                 }
 
@@ -282,9 +282,9 @@ export class ReactSpoon {
         const rhLength = routeHierarchy.length;
 
         //Determine the combined props, which is a merger of all the props in this router instance
-        const providerProps = this.providers.reduce((result, next)=>{
-            return {...result, ...next.props}
-        },{});
+        const providerProps = this.providers.reduce((result, next) => {
+            return { ...result, ...next.props }
+        }, {});
 
         const combinedProps = { ...this.state, ...routeParams, ...providerProps };
 
@@ -303,7 +303,8 @@ export class ReactSpoon {
                  * If the last item in the route hierarchy has a children field, then this is obviously a nested 404
                  */
                 if (i === rhLength - 1 && route.children) {
-                    component = React.createElement(handler, { ...combinedProps, key: 'route' + i }, [<h1 key="page404">404
+                    component = React.createElement(handler, { ...combinedProps, key: 'route' + i }, [<h1
+                        key="page404">404
                         Nothing
                         Here</h1>]);
                 } else {
@@ -337,7 +338,7 @@ export class ReactSpoon {
          */
         routeHierarchy.forEach((it) => {
 
-            if (( it.handler.wrappedComponent || it.handler).onEnter) {
+            if ((it.handler.wrappedComponent || it.handler).onEnter) {
                 it.handler.wrappedComponent.onEnter(combinedProps);
             }
         });
@@ -377,7 +378,7 @@ export class ReactSpoon {
             urlState = JSON.parse(stateString);
             //console.log('State pulled from URL', urlState)
         } catch (err) {
-            console.error(stateObj, err.stack)
+            console.error('Error loading data from state',err, stateString)
         }
     }
 
