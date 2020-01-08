@@ -160,9 +160,11 @@ export class ReactSpoon {
                  * Create context
                  */
                 if (it.handler) {
-                    ((it.handler as any).wrappedComponent || it.handler).contextTypes = {
+                    const h = ((it.handler as any).wrappedComponent || it.handler);
+                    h.contextTypes = {
                         router: Proptypes.any
                     };
+                    h.contextType = SpoonContext;
                 }
 
                 if (it.children) {
@@ -428,6 +430,7 @@ export class Link extends Component<ILink, any> {
     static contextTypes = {
         router: Proptypes.object
     };
+    static contextType = SpoonContext;
     private isActive: boolean;
     private href: string;
 
