@@ -20,18 +20,18 @@ Github: https://github.com/iyobo/react-spoon
 
 ## How to use
 
-```
+```typescript
 npm install --save react-spoon
 ```
 
 
 in html
-```
+```typescript
 <div id='app'></div>
 ```
 
 In main file:
-```
+```typescript
 
 import React from 'react';
 import {ReactSpoon} from 'react-spoon';
@@ -87,7 +87,7 @@ These have been replaced by opts.providers and are now **decommisioned**. Please
 
 ## True Nested Routing
 A layout rendering nested pages is really just rendering children.
-```
+```typescript
 import {Component} from 'react';
 
 class AppLayout extends Component {
@@ -105,7 +105,7 @@ class AppLayout extends Component {
 
 ## Nav Links (Named Routes)
 
-```
+```typescript
 import {Link} from 'react-spoon';
 
 ...
@@ -137,7 +137,7 @@ import {Link} from 'react-spoon';
 Every instance of React-Spoon makes use of the react context API for making itself visible in any component. 
 You grab a reference to this instance by statically defining contextTypes in your component:
 
-```
+```typescript
 class MyComponent extends React.Component{
 
     ... 
@@ -172,7 +172,7 @@ Spoon will look for a static OnEnter(props) function declaration in your React C
 This respects nested routing too, with the topmost component's onEnter triggered first and the next in sequence. (First to Last)
 In the future, this function might be made to handle (returned) promises.
 
-```
+```typescript
 class DashboardPage extends React.Component{
 
 ...
@@ -194,7 +194,7 @@ Beat you to it! :D
 You can now create a static onLeave(props) function that RSpoon will call whenever it is navigating away from a route's component.
 This, like onEnter, respects nested routing. Only difference is that it reverses the order of activation, i.e. Last to First.
 
-```
+```typescript
 class DashboardPage extends React.Component{
 
 ...
@@ -215,7 +215,7 @@ e.g See what Google Maps does to it's URL while you navigate. Then try copy that
 
 ### Storing State
 
-```
+```typescript
 import {storeState} from 'react-spoon';
 
 
@@ -245,7 +245,7 @@ You'll want to do this, for example, when the state you are trying to persist in
 
 ### Retrieving State
 Retrieving state is just as easy
-```
+```typescript
 import {getState} from 'react-spoon';
 
 ...
