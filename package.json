@@ -1,6 +1,6 @@
 {
   "name": "react-spoon",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A simple and sane router for React",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
