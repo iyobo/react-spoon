@@ -5,14 +5,12 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "keywords": [
-    "circular references",
-    "typescript",
-    "mobx",
-    "ssr",
-    "root-store",
-    "serializer",
-    "deserializer",
-    "class"
+    "react",
+    "reactjs",
+    "router",
+    "routing",
+    "jollof",
+    "iyobo"
   ],
   "repository": {
     "type": "github",
@@ -32,20 +30,20 @@
   "author": "Iyobo Eki",
   "license": "MIT",
   "dependencies": {
-    "class-transformer": "^0.2.3",
-    "lodash": "^4.17.14",
-    "reflect-metadata": "^0.1.13",
-    "react": "^16.x",
-    "react-dom": "^16.x"
+    "prop-types": "^15.7.2",
+    "react": "16.11.0",
+    "react-dom": "16.11.0",
+    "url-pattern": "^1.0.3"
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@types/lodash": "^4.14.136",
-    "jest": "^24.8.0",
+    "@types/jest": "^24.0.25",
+    "@types/react": "16.9.17",
+    "@types/react-dom": "16.9.4",
+    "jest": "^24.9.0",
     "supertest": "^4.0.2",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
+    "ts-jest": "^24.3.0",
+    "tslint": "^5.20.1",
     "typescript": "^3.5.3"
   }
 }

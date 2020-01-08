@@ -2,14 +2,16 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
+    "jsx": "react",
     "lib": [
       "es6",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "scripthost"
     ],
     "declaration": true,                   
     "sourceMap": true,
     "outDir": "dist",
-    "moduleResolution": "node",
     "baseUrl": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -17,5 +19,8 @@
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "dist"
   ]
 }

@@ -58,7 +58,14 @@ new ReactSpoon([
         ]
     }
 
-], { domId: 'app', providers: [ {component: SomeProvider, props: { store }}, {component: AnotherProvider} ] );
+], 
+{ 
+    domId: 'app', 
+    providers: [ 
+        {component: SomeProvider, props: { store }}, 
+        {component: AnotherProvider} 
+    ]
+});
 ```
 
 You are also able to have multiple ReactSpoon instances on a page with multiple anchor points/domIds.
